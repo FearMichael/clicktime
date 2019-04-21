@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import SmartClick from "./components/SmartClick"
-import DumbClick from "./components/DumbClick"
+// import DumbClick from "./components/DumbClick"
 
 class App extends Component {
   render() {

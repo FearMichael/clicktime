@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
-import { Module } from 'module';
+import React from 'react';
+// import src from '*.bmp';
+// import { Module } from 'module';
 
 
 const DumbClick = (props) => {
+    // console.log(props);
        return (
             <div>
                 <img 
                 className="responsive-img rounded col l4" 
-                src="https://source.unsplash.com/random" 
+                src={props.url} 
                 alt="Click on this to play"
-                onClick={() => this.handleClick()}>
+                onClick={() => props.handleClick()}>
                 </img>
             </div>
        );

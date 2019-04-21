@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import DumbClick from "./DumbClick"
+import { Module } from 'module';
 
 
 class SmartClick extends Component {
@@ -7,3 +9,5 @@ class SmartClick extends Component {
 
     }
 }
+
+module.exports = SmartClick;

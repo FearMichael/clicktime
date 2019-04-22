@@ -4,12 +4,12 @@ import React from 'react';
 
 
 const DumbClick = (props) => {
-    // console.log(props);
+    console.log(props);
        return (
             <div>
                 <img 
-                className="responsive-img rounded col l4" 
-                src={props.url} 
+                className="responsive-img col l4" 
+                src={props.src} 
                 alt="Click on this to play"
                 onClick={() => props.handleClick()}>
                 </img>

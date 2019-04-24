@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import SmartClick from "./components/SmartClick"
+import 'materialize-css/dist/css/materialize.min.css';
+
 // import DumbClick from "./components/DumbClick"
 
 class App extends Component {

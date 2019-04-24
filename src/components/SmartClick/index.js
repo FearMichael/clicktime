@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import DumbClick from "../DumbClick"
-// import pics from "../../components/pics"
-// import { Module } from 'module';
-
+import M from "materialize-css";
 
 
 class SmartClick extends Component {
     state = {
         userScore: 0,
         clickedPics: [],
-        picId: [1, 2, 3, 4, 5, 6],
-        lost: false
+        lost: false,
+        picSrc: [
+            "../../images/brooklyn99-1.jpg",
+            "../../images/brooklyn99-2.jpg",
+            "../../images/brooklyn99-3.jpg",
+            "../../images/brooklyn99-4.jpg",
+            "../../images/brooklyn99-5.jpg",
+            "../../images/brooklyn99-6.jpg",
+            "../../images/brooklyn99-7.jpg",
+            "../../images/brooklyn99-8.jpg",
+            "../../images/brooklyn99-9.jpg",
+            ],
+    }
+
+    componentDidMount() {
+        M.AutoInit();
     }
 
     // componentDidMount() {
@@ -38,17 +50,28 @@ class SmartClick extends Component {
     //     });
     // };
 
-    sendToast = (text, classes, duration) => {
-        window.Materialize.toast({html: `${text}`, classes: `${classes}`, displayLength: `${duration}`})
+    // sendToast = (text, classes, duration) => {
+    //     window.Materialize.toast({html: `${text}`, classes: `${classes}`, displayLength: `${duration}`})
+    // }
+    shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+            // console.log(array);
+            return array;
+        }
     }
 
     handleClick = (id) => {
-        console.log(id);
+        // console.log(id);
         if (this.state.clickedPics.includes(id)) {
+            console.log("You clicked the same pic!")
             let message = "Uh oh! You already clicked that!"
-            this.sendToast(message, "red rounded", 3000)
+            // this.sendToast(message, "red rounded", 3000)
+            this.setState({lost: true});
         } else {
-            this.sendToast("Nice! Keep it up!", "blue rounded", 2000)
+            console.log("keep winning!")
+            // this.sendToast("Nice! Keep it up!", "blue rounded", 2000)
             this.setState((state) => {
                 let newScore = this.state.userScore + 1 
                 console.log(newScore);
@@ -62,23 +85,25 @@ class SmartClick extends Component {
             this.setState({
                 userScore: 0,
                 clickedPics: [],
-                picId: [1,2,3,4,5,6],
-                lost: false
+                lost: false,
             });
         }
         console.log(this.state.clickedPics);
     }
     render() {
-        console.log(this.state.picId)
-        const ids = this.state.picId
+        // console.log(this.state.picSrc)
+        let pics = this.state.picSrc
+        let randomPics = this.shuffleArray(pics);
         return ( 
             // console.log(elem.id);
                 <div className="row">
-                {ids.map((elem) => {
+                {randomPics.map((elem, id) => {
+                    // console.log(elem)
                     return <DumbClick 
                             handleClick={this.handleClick} 
-                            key={elem.toString()} 
-                            value={elem} 
+                            key={id}
+                            src={elem} 
+                            data={id}
                             />
                 })}
                 </div>

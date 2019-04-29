@@ -7,6 +7,15 @@ import Navbar from "../../components/Navbar";
 import Grid from "@material-ui/core/Grid"
 import Notification from "../Notification";
 
+interface state {
+    userScore: number,
+    userMessage: string,
+    clickedPics: string[],
+    lost: boolean,
+    highScore: number,
+    picSrc: string[]
+};
+
 const styles = (theme: any) => ({
     root: {
         flexGrow: 1
@@ -42,6 +51,7 @@ class SmartClick extends Component {
         userMessage: "",
         clickedPics: [],
         lost: false,
+        highScore: 0,
         picSrc: [
             "../../images/brooklyn99-1.jpg",
             "../../images/brooklyn99-2.jpg",
@@ -85,32 +95,29 @@ class SmartClick extends Component {
     };
 
     handleClick = (id: never) => {
+        console.log(id);
         let newScore = this.state.userScore + 1 
         this.setState((prevState: any) => ({
             clickedPics: [ prevState.clickedPics, id ]
         }));
-        console.log(this.state);
-        // let idArr: string[] = [];
-        // idArr.push(id);
         if (this.state.clickedPics.includes(id)) {
-            console.log("You clicked the same pic!")
-            // let message = "Uh oh! You already clicked that!"
-            // this.sendToast(message, "red rounded", 3000)
             this.setState({
                 lost: true,
                 userScore: 0,
-                userMessage: "Uh oh.. you already clicked that!!" 
+                userMessage: "You lose!" 
             }, () => {
-                console.log(this.state);
-                this.userLost(this.state.lost);
+                setTimeout(() => {
+                    this.userLost(this.state.lost);
+                }, 3000)
             });
 
         } else {
-            console.log("keep winning!")
-            // this.sendToast("Nice! Keep it up!", "blue rounded", 2000)
-            // console.log(newScore);
-        // console.log(this.state);
-        this.setState({userScore: newScore})
+        this.setState({
+            userScore: newScore, 
+            userMessage: "Great job!"
+        }, () => {
+           if (this.state.userScore > this.state.highScore) {this.setState({highScore: this.state.userScore})}
+        });
     };
 }
     render() {
@@ -121,6 +128,8 @@ class SmartClick extends Component {
             <Navbar 
                 score={this.state.userScore}
                 message={this.state.userMessage}
+                lost={this.state.lost}
+                highScore={this.state.highScore}
                 />
              <div style={picBackground}> 
 

@@ -94,12 +94,18 @@ class SmartClick extends Component {
         }
     };
 
-    handleClick = (id: never) => {
+    arrayCheck = (arr: string[], item: string) => {
+        arr.forEach(elem => {
+            if (elem === item) {
+                return true
+            } 
+        })
+    }
+
+    handleClick = (id: string):void => {
+        // this.state.clickedPics.indexOf(id);
         console.log(id);
-        let newScore = this.state.userScore + 1 
-        this.setState((prevState: any) => ({
-            clickedPics: [ prevState.clickedPics, id ]
-        }));
+        let newScore :number = this.state.userScore + 1 
         if (this.state.clickedPics.includes(id)) {
             this.setState({
                 lost: true,
@@ -107,18 +113,24 @@ class SmartClick extends Component {
                 userMessage: "You lose!" 
             }, () => {
                 setTimeout(() => {
+                    console.log(this.state.clickedPics);
                     this.userLost(this.state.lost);
                 }, 3000)
             });
-
         } else {
         this.setState({
             userScore: newScore, 
             userMessage: "Great job!"
         }, () => {
+            console.log(this.state.clickedPics);
            if (this.state.userScore > this.state.highScore) {this.setState({highScore: this.state.userScore})}
         });
     };
+    let newPics:string[] = [] 
+    newPics.push(id);
+    this.setState({
+        clickedPics: this.state.clickedPics.concat(newPics)
+    });
 }
     render() {
         let pics: string[] = this.state.picSrc

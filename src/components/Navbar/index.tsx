@@ -15,9 +15,13 @@ const styles = {
   },
 };
 
+const navbarStyle = {
+
+}
 
 export interface Props {
-    score: number
+    score: number,
+    message: string
 }
 
 export interface Props extends WithStyles<typeof styles> {}
@@ -27,13 +31,18 @@ function SimpleAppBar(props: Props) {
     
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar 
+        style={navbarStyle}
+        position="fixed" color="default">
         <Toolbar>
           <Typography variant="h6" color="inherit">
             Time. To. Click.
           </Typography>
-          <Typography variant="h6" color="default" align="right" inline={true}>
+          <Typography variant="h6" color="default">
               Score: {props.score}
+          </Typography>
+          <Typography variant="h6" color="default">
+            {props.message}
           </Typography>
         </Toolbar>
       </AppBar>

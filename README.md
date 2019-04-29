@@ -10,4 +10,7 @@
 ### Issues
 - Known bug that you can click faster than the state can be set, resulting in erroneous "correct" calculations
 
+### Fun Fact
+- Deployed on AWS for fun and exploring AWS possibilities for static hosting
+
 #### Happy Clicking!

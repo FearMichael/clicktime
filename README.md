@@ -14,3 +14,4 @@
 - Deployed on AWS for fun and exploring AWS possibilities for static hosting
 
 #### Happy Clicking!
+http://reactbuttongame.s3-website-us-east-1.amazonaws.com
